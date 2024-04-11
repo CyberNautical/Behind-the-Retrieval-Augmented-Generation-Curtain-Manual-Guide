@@ -1,76 +1,62 @@
-# Manual Demo for Retrieval Augmented Generation
-This repository will introduce you to Retrieval Augmented Generation (RAG) with
-easy to use examples that you can build upon. The examples use Python with
-Jupyter Notebooks and CSV files. The vector database uses the Qdrant database
-which can run in-memory.
+# Behind the Retrieval Augmented Generation Curtain- Manual Guide
+
+## Introduction
+This document introduces Retrieval Augmented Generation (RAG) with step-by-step, easy-to-follow examples using Python in Jupyter Notebooks, CSV files, and the Qdrant vector database, which can operate in-memory.
 
 ## RAG Cycle
-
-RAG is a pattern which uses your data with an LLM to generate answers specific to your data. When a user asks a question, the data store is searched based on user input. The user question is then combined with the matching results and sent to the LLM using a prompt (explicit instructions to an AI or machine learning model) to generate the desired answer. This can be illustrated as follows.
+RAG is a methodology that combines your dataset with a large language model (LLM) to generate answers specific to your queries. When a user poses a question, the system searches the dataset for relevant data based on the input. 
 
 ![image](https://github.com/armansalimi-microsoft/RAG_Manual_DEMO/assets/150470041/2ae2d1b4-66ed-42fa-813b-9f8226056a44)
 
-RAG uses your data to generate answers to the user question. For RAG to work well, we need to find a way to search and send your data in an easy and cost efficient manner to the LLMs. This is achieved by using an Index. An Index is a data store which allows you to search data efficiently. This is very useful in RAG. An Index can be optimized for LLMs by creating Vectors (text/data converted to number sequences using an embedding model). A good Index usually has efficient search capabilities like keyword searches, semantic searches, vector searches or a combination of these. This optimized RAG pattern can be illustrated as follows.
+The results are then combined with the user's query and sent to the LLM as a prompt to generate the desired answer. RAG's efficacy relies on the efficiency of the search mechanism, facilitated by an Index—a data store optimized for quick searches and integrating with LLMs. A robust Index supports various search types, such as keyword, semantic, and vector searches, essential for the optimized RAG pattern.
 
 ![image](https://github.com/armansalimi-microsoft/RAG_Manual_DEMO/assets/150470041/7df60656-f4d9-4dc3-9a42-12b04d3c51f4)
 
 
 ## Key Terms
-•	Retrieval augmented generation (RAG): A technique in AI where a large language model accesses new or recent data outside its training set to provide better answers and improved results.
-
-•	Vector database: A search engine or database that stores vectorized documents, enabling more accurate information retrieval for AI models.
-
-•	Embeddings: Representations of text data as vectors in a high-dimensional space, allowing similarity comparisons between different pieces of text.
-
-•	Azure AI Search: Microsoft's cloud-based search service (formerly Azure Cognitive Services Search) that offers retrieval augmentation capabilities for large language models.
-
-•	Comma separated value (CSV): A common data format where values are separated by commas, used in this transcript to demonstrate RAG implementation with a vector database.
-
-•	Pandas library: A Python library used for data manipulation and analysis, particularly useful when working with CSV files.
-
-•	Qdrant: Software used for creating an in-memory vector database search, enabling efficient text retrieval and embedding storage.
-
-•	Sentence transformers: A tool to encode sentences into numerical representations (embeddings) that can be compared using cosine similarity or other distance metrics.
-
-•	Cosine distance: A measure of similarity between two non-zero vectors in a multi-dimensional space, often used in text analysis and information retrieval.
+•	**Retrieval augmented generation (RAG)**: A technique where a large language model enhances its responses by accessing external data.
+•	**Vector database**: A database that stores information as vectors, which are numerical representations enabling precise retrieval.
+•	**Embeddings**: High-dimensional vector representations of text, facilitating similarity assessments between texts.
+•	**Comma separated value (CSV)**: A file format that uses commas to separate individual data items.
+•	**Pandas library**: A Python library for data manipulation and analysis, commonly used with CSV files.
+•	**Qdrant**: A software tool for creating in-memory vector databases, which are essential for efficient text retrieval.
+•	**Sentence transformers**: Tools that convert sentences into embeddings, allowing comparison through metrics like cosine similarity.
+•	**Cosine distance**: A metric used to measure the similarity between two vectors within a multi-dimensional space.
 
 
 ## Setup your environment
-
-This example can run in Codespaces but you can use the following if you are
-cloniing this repository:
+Before beginning the steps outlined in this manual, please ensure you have access to the necessary files and scripts. You can do this by either forking or downloading the repository. This will provide you with all the resources required to follow the interactive Jupyter Notebook and successfully implement your RAG system.
 
 **Install the dependencies**
-
-Create the virtual environment and install the dependencies:
+To set up your development environment using Conda, follow these steps to create a Conda environment and install the necessary libraries:
 
 ```
-python3 -m venv .venv
-source .venv/bin/activate
-.venv/bin/pip install -r requirements.txt
+conda create -n rag_env python=3.9
+conda activate rag_env
+conda install pip
+pip install -r requirements.txt
 ```
 
-Here is a summary of what this repository will use:
-
+Dependencies include:
 1. [Qdrant](https://github.com/qdrant/qdrant) for the vector database. We will use an in-memory database for the examples
 2. [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) for the LLM - OpenAI API compatible key and endpoint 
 3. [OpenAI's Python API](https://pypi.org/project/openai/) to connect to the LLM after retrieving the vectors response from Qdrant
-4. Sentence Transformers to create the embeddings with minimal effort
+4. [Sentence Transformers](https://www.sbert.net/) to create the embeddings with minimal effort
 
+## Interactive Guide
+To effectively implement the steps outlined in this manual, please use the interactive Jupyter Notebook available [here](https://github.com/armansalimi-microsoft/RAG_Manual_DEMO/blob/main/Manual%20Guide%20Notebook.ipynb). This notebook provides a hands-on approach to each step from importing your data to testing the RAG system with your own dataset. It is designed to be user-friendly, ensuring a practical and educational experience as you build and deploy a Retrieval Augmented Generation system.
 
-## Step 1: Import your data
+#### Step 1: Import your data
+The data will be used to create the embeddings for the vector database later and you will need to format it as a list of dictionaries.Prepare your dataset by formatting it as a list of dictionaries, which will later facilitate the creation of embeddings for the vector database. To ensure that the procesess is lightening fast, I have listed the top 150 records of the full dataset.
 
-The data will be used to create the embeddings for the vector database later and you will need to format it as a list of dictionaries.
+Full Dataset: [Kaggle Myntra Fashion Products](https://www.kaggle.com/datasets/nirokey/myntra-fashion-products)
+Top 150 Dataset: [150 Kaggle Myntra Fashon Products](https://github.com/armansalimi-microsoft/RAG_Manual_DEMO/blob/main/Demo_fashion_products.csv)
 
-Dataset: [Kaggle Myntra Fashion Products - Top 150 results](https://www.kaggle.com/datasets/nirokey/myntra-fashion-products)
+#### Step 2: Create embeddings
+Generate embeddings using Sentence Transformers, and verify their storage and search functionality within the Qdrant database.
 
-## SAtep 2: Create embeddings
+#### Step 3: Implement RAG with LLM and Qdrant
+Leverage the OpenAI API to integrate your data with the LLM, creating a dynamic RAG system based on your specific datase
 
-Use Sentence Transformers to create the embeddings for your data. This will be used to store the vectors in the Qdrant database. You will verify that the embeddings are created and stored in the database and that a search works correctly
-
-## Step 3: Create a RAG with LLM and Qdrant using your own data
-
-Use OpenAI API endpoint to create a RAG with your own data. 
-
-## Step 4: Test
-
+#### Step 4: Test
+Ensure the system accurately retrieves data and generates responses by conducting thorough tests.
