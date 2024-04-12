@@ -14,14 +14,14 @@ The results are then combined with the user's query and sent to the LLM as a pro
 
 
 ## Key Terms
-•	**Retrieval augmented generation (RAG)**: A technique where a large language model enhances its responses by accessing external data.
-•	**Vector database**: A database that stores information as vectors, which are numerical representations enabling precise retrieval.
-•	**Embeddings**: High-dimensional vector representations of text, facilitating similarity assessments between texts.
-•	**Comma separated value (CSV)**: A file format that uses commas to separate individual data items.
-•	**Pandas library**: A Python library for data manipulation and analysis, commonly used with CSV files.
-•	**Qdrant**: A software tool for creating in-memory vector databases, which are essential for efficient text retrieval.
-•	**Sentence transformers**: Tools that convert sentences into embeddings, allowing comparison through metrics like cosine similarity.
-•	**Cosine distance**: A metric used to measure the similarity between two vectors within a multi-dimensional space.
+- **Retrieval augmented generation (RAG)**: A technique where a large language model enhances its responses by accessing external data.
+- **Vector database**: A database that stores information as vectors, which are numerical representations enabling precise retrieval.
+-	**Embeddings**: High-dimensional vector representations of text, facilitating similarity assessments between texts.
+-	**Comma separated value (CSV)**: A file format that uses commas to separate individual data items.
+-	**Pandas library**: A Python library for data manipulation and analysis, commonly used with CSV files.
+-	**Qdrant**: A software tool for creating in-memory vector databases, which are essential for efficient text retrieval.
+-	**Sentence transformers**: Tools that convert sentences into embeddings, allowing comparison through metrics like cosine similarity.
+-	**Cosine distance**: A metric used to measure the similarity between two vectors within a multi-dimensional space.
 
 
 ## Setup your environment
