@@ -1,7 +1,7 @@
 # Behind the Retrieval Augmented Generation Curtain- Manual Guide
 
 ## Introduction
-This document introduces Retrieval Augmented Generation (RAG) with step-by-step, easy-to-follow examples using Python in Jupyter Notebooks, CSV files, and the Qdrant vector database, which can operate in-memory.
+This document and the associate notebook help provide users a deeper understanding of the intricate processes happening behind the AI Studio curtain of Retrieval Augmented Generation (RAG) with step-by-step, easy-to-follow examples using Python in Jupyter Notebooks, CSV files, and the Qdrant vector database, which can operate in-memory. 
 
 ## RAG Cycle
 RAG is a methodology that combines your dataset with a large language model (LLM) to generate answers specific to your queries. When a user poses a question, the system searches the dataset for relevant data based on the input. 
