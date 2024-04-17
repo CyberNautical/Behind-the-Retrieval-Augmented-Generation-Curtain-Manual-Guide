@@ -10,7 +10,7 @@ RAG is a methodology that combines your dataset with a large language model (LLM
 
 The results are then combined with the user's query and sent to the LLM as a prompt to generate the desired answer. RAG's efficacy relies on the efficiency of the search mechanism, facilitated by an Index—a data store optimized for quick searches and integrating with LLMs. A robust Index supports various search types, such as keyword, semantic, and vector searches, essential for the optimized RAG pattern.
 
-![image](https://github.com/armansalimi-microsoft/RAG_Manual_DEMO/assets/150470041/7df60656-f4d9-4dc3-9a42-12b04d3c51f4)
+![Rag Img](https://github.com/armansalimi-microsoft/Behind-the-Retrieval-Augmented-Generation-Curtain-Manual-Guide/assets/150470041/7e90d97f-068a-400b-9f49-590799fa5dd0)
 
 
 ## Key Terms
